@@ -1,0 +1,71 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+
+<head>
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+    <title><%=siteName%>有新的回复</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+</head>
+
+<body>
+    <table style="width: 500px;height:99.8%;background-color: #ffffff;margin-top:40px;margin-left: auto;margin-right:auto;padding-left:20px;padding-right:20px">
+        <tr>
+            <td style="text-align:center">
+                <h1 style="margin-bottom: 0px; border-bottom: 1px solid #eaecef; padding-bottom: 0.3em; font-size: 2em;font-family:-apple-system,BlinkMacSystemFont,Segoe UI,Helvetica,Arial,sans-serif,Apple Color Emoji,Segoe UI Emoji,Segoe UI Symbol">
+                    <%=siteName%>
+                </h1>
+            </td>
+        </tr>
+        <tr>
+            <td style="text-align:left">
+                <p style="margin-top: 16px;margin-bottom: 16px; font-size:16px; font-family:-apple-system,BlinkMacSystemFont,Segoe UI,Helvetica,Arial,sans-serif,Apple Color Emoji,Segoe UI Emoji,Segoe UI Symbol"><%=pname%> 同学，您曾在文章上发表评论：</p>
+            </td>
+        </tr>
+        <tr>
+            <td>
+                <table>
+                    <tr>
+                        <td style="background-color:#DFE2E5;padding-left:3px;">
+                        </td>
+                        <td style="padding-left:14px"></td>
+                        <td>
+                            <p style="color:rgb(119, 119, 119);margin-top:0;margin-bottom:0; font-size:16px; font-family:-apple-system,BlinkMacSystemFont,Segoe UI,Helvetica,Arial,sans-serif,Apple Color Emoji,Segoe UI Emoji,Segoe UI Symbol">
+                                <%-ptext%>
+                            </p>
+                        </td>
+                    </tr>
+                </table>
+            </td>
+        </tr>
+        <tr>
+            <td style="text-align:left">
+                <p style="margin-top: 16px;margin-bottom: 16px; font-size:16px; font-family:-apple-system,BlinkMacSystemFont,Segoe UI,Helvetica,Arial,sans-serif,Apple Color Emoji,Segoe UI Emoji,Segoe UI Symbol"><%=name%> 给您的回复如下：</p>
+            </td>
+        </tr>
+        <tr>
+            <td>
+                <table>
+                    <tr>
+                        <td style="background-color:#DFE2E5;padding-left:3px;">
+                        </td>
+                        <td style="padding-left:14px"></td>
+                        <td>
+                            <p style="color:rgb(119, 119, 119);margin-top:0;margin-bottom:0; font-size:16px; font-family:-apple-system,BlinkMacSystemFont,Segoe UI,Helvetica,Arial,sans-serif,Apple Color Emoji,Segoe UI Emoji,Segoe UI Symbol">
+                                <%-text%>
+                            </p>
+                        </td>
+                    </tr>
+                </table>
+            </td>
+        </tr>
+        <tr>
+            <td>
+                <p style="margin-top:16px; font-size:16px; font-family:-apple-system,BlinkMacSystemFont,Segoe UI,Helvetica,Arial,sans-serif,Apple Color Emoji,Segoe UI Emoji,Segoe UI Symbol">
+                    您可以点击<a href="<%=url%>#comments" style="text-decoration: none">查看回复的完整内容</a>，欢迎再次光临<a href="<%=siteUrl%>" style="text-decoration: none"><%=siteName%></a>
+                </p>
+            </td>
+        </tr>
+    </table>
+</body>
+
+</html>

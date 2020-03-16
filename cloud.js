@@ -44,8 +44,8 @@ AV.Cloud.define('resend_mails', function(req) {
             resolve(count);
         }).then((count)=>{
             console.log(`昨日${count}条未成功发送的通知邮件处理完毕！`);
-        }).catch(()=>{
-
+        }).catch((e)=>{
+            console.log('错误日志:' + e);
         });
     });
 });

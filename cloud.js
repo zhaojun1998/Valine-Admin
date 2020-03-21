@@ -2,7 +2,6 @@ const AV = require('leanengine');
 const mail = require('./utilities/send-mail');
 const Comment = AV.Object.extend('Comment');
 const request = require('request');
-
 function sendNotification(currentComment) {
     // 通知站长
     mail.notice(currentComment);
@@ -34,28 +33,28 @@ AV.Cloud.afterSave('Comment', function (request) {
     return sendNotification(currentComment)
 });
 
-AV.Cloud.define('reissue_mail', function (req) {
+AV.Cloud.define('resend_mails', function(req) {
     let query = new AV.Query(Comment);
-    query.greaterThanOrEqualTo('createdAt', new Date(new Date().getTime() - 24 * 60 * 60 * 1000));
+    query.greaterThanOrEqualTo('createdAt', new Date(new Date().getTime() - 24*60*60*1000));
     query.notEqualTo('isNotified', true);
     // 如果你的评论量很大，可以适当调高数量限制，最高1000
     query.limit(200);
-    return query.find().then(function (results) {
-        new Promise((resolve, reject) => {
+    return query.find().then(function(results) {
+        new Promise((resolve, reject)=>{
             count = results.length;
-            for (var i = 0; i < results.length; i++) {
-                sendNotification(results[i]);
+            for (var i = 0; i < results.length; i++ ) {
+                sendNotification(results[i], req.meta.remoteAddress);
             }
             resolve(count);
-        }).then((count) => {
+        }).then((count)=>{
             console.log(`昨日${count}条未成功发送的通知邮件处理完毕！`);
-        }).catch((e) => {
-            console.log('错误日志:' + e);
+        }).catch((err)=>{
+        	console.log(err);
         });
     });
 });
 
-AV.Cloud.define('auto_wake', function (req) {
+AV.Cloud.define('self_wake', function(req) {
     request(process.env.ADMIN_URL, function (error, response, body) {
         console.log('自唤醒任务执行成功，响应状态码为:', response && response.statusCode);
     });

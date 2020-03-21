@@ -43,7 +43,7 @@ AV.Cloud.define('resend_mails', function(req) {
         new Promise((resolve, reject)=>{
             count = results.length;
             for (var i = 0; i < results.length; i++ ) {
-                sendNotification(results[i], req.meta.remoteAddress);
+                sendNotification(results[i]);
             }
             resolve(count);
         }).then((count)=>{

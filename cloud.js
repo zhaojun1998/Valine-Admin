@@ -2,14 +2,12 @@ const AV = require('leanengine');
 const mail = require('./utilities/send-mail');
 const Comment = AV.Object.extend('Comment');
 const request = require('request');
-AV.Cloud.afterSave('Comment', function (request) {
-    let currentComment = request.object;
-
+function sendNotification(currentComment) {
     // 通知站长
     mail.notice(currentComment);
-    
+
     // AT评论通知
-    let pid =currentComment.get('pid');
+    let pid = currentComment.get('pid');
 
     if (!pid) {
         console.log("这条评论没有 @ 任何人");
@@ -27,6 +25,12 @@ AV.Cloud.afterSave('Comment', function (request) {
     }, function (error) {
         console.warn('好像 @ 了一个不存在的人!!!');
     });
+}
+
+AV.Cloud.afterSave('Comment', function (request) {
+    let currentComment = request.object;
+
+    return sendNotification(currentComment)
 });
 
 AV.Cloud.define('resend_mails', function(req) {
@@ -39,13 +43,13 @@ AV.Cloud.define('resend_mails', function(req) {
         new Promise((resolve, reject)=>{
             count = results.length;
             for (var i = 0; i < results.length; i++ ) {
-                sendNotification(results[i], req.meta.remoteAddress);
+                sendNotification(results[i]);
             }
             resolve(count);
         }).then((count)=>{
             console.log(`昨日${count}条未成功发送的通知邮件处理完毕！`);
-        }).catch(()=>{
-
+        }).catch((err)=>{
+        	console.log(err);
         });
     });
 });

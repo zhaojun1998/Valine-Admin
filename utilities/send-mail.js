@@ -44,7 +44,7 @@ exports.notice = (comment) => {
                         });
 
     let mailOptions = {
-        from: '"' + process.env.SENDER_NAME + '" <' + process.env.SMTP_USER + '>',
+        from: '"' + process.env.SENDER_NAME + '" <' + process.env.FROM_EMAIL + '>',
         to: process.env.TO_EMAIL ? process.env.TO_EMAIL : process.env.SMTP_USER,
         subject: emailSubject,
         html: emailContent
@@ -81,7 +81,7 @@ exports.send = (currentComment, parentComment)=> {
                             url: process.env.SITE_URL + currentComment.get('url') + "#" + currentComment.get('pid')
                         });
     let mailOptions = {
-        from: '"' + process.env.SENDER_NAME + '" <' + process.env.SMTP_USER + '>',
+        from: '"' + process.env.SENDER_NAME + '" <' + process.env.FROM_EMAIL + '>',
         to: parentComment.get('mail'),
         subject: emailSubject,
         html: emailContent
